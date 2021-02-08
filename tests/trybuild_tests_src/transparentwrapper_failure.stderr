@@ -1,0 +1,11 @@
+error: TransparentWrapper requires the struct to be #[repr(transparent)]
+ --> $DIR/transparentwrapper_failure.rs:3:10
+  |
+3 | #[derive(TransparentWrapper)]
+  |          ^^^^^^^^^^^^^^^^^^
+
+error: TransparentWrapper must have one field of the wrapped type
+ --> $DIR/transparentwrapper_failure.rs:7:10
+  |
+7 | #[derive(TransparentWrapper)]
+  |          ^^^^^^^^^^^^^^^^^^
