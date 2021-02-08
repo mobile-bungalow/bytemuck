@@ -1,6 +1,6 @@
 #[test]
 #[cfg(feature = "derive")]
-fn derive() {
+fn derive_tests() {
     let tester = trybuild::TestCases::new();
     tester.pass("tests/trybuild_tests_src/derive.rs");
     tester.compile_fail("tests/trybuild_tests_src/pod_derive_failure.rs");
