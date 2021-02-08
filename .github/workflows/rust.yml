@@ -36,7 +36,10 @@ jobs:
     - run: export TRYBUILD=overwrite
     - run: cargo test --verbose
     - run: cargo test --verbose --no-default-features
-    - run: cargo test --verbose --all-features
+    - name: all features
+      env:
+        TRYBUILD: overwrite
+      run: cargo test --verbose --all-features
       if: matrix.rust != '1.34.0'
     - run: cargo test --verbose --manifest-path=derive/Cargo.toml --all-features
       if: matrix.rust != '1.34.0'
@@ -52,9 +55,11 @@ jobs:
     - uses: hecrj/setup-rust-action@v1
     - uses: actions/checkout@v2
     - run: cargo install cross
-    - run: export TRYBUILD=overwrite
     - run: cross test --verbose --target=${{ matrix.target }} --no-default-features
-    - run: cross test --verbose --target=${{ matrix.target }} --all-features 
+    - name: all features cross
+      env:
+        TRYBUILD: overwrite
+      run: cross test --verbose --target=${{ matrix.target }} --all-features 
     - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --all-features 
 
   miri-test:
@@ -88,6 +93,7 @@ jobs:
         components: rust-src
     - name: Test with sanitizer
       env:
+        TRYBUILD: overwrite
         RUSTFLAGS: -Zsanitizer=${{ matrix.sanitizer }}
         RUSTDOCFLAGS: -Zsanitizer=${{ matrix.sanitizer }}
         ASAN_OPTIONS: detect_stack_use_after_return=1
@@ -104,7 +110,6 @@ jobs:
       # positives, so we just skip it, the generated code is what we care
       # about anyway.
       run: |
-        export TRYBUILD=overwrite
         cargo test -Zbuild-std --verbose --target=x86_64-unknown-linux-gnu --no-default-features
         cargo test -Zbuild-std --verbose --target=x86_64-unknown-linux-gnu --all-features
 
