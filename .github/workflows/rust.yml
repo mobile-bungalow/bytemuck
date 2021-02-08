@@ -55,8 +55,7 @@ jobs:
     - run: cargo install cross
     - run: cross test --verbose --target=${{ matrix.target }} --no-default-features
     - run: cross test --verbose --target=${{ matrix.target }} --features="all_features_except_derive"
-    - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --features="all_features_except_derive"
-
+    - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --all-features 
 
   miri-test:
     name: Test with miri
