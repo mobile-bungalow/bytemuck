@@ -1,6 +1,7 @@
 #[test]
 #[cfg(feature = "derive")]
 fn derive_tests() {
+    env::set_var("TRYBUILD", "overwrite");
     let tester = trybuild::TestCases::new();
     tester.pass("tests/trybuild_tests_src/derive.rs");
     tester.compile_fail("tests/trybuild_tests_src/pod_derive_failure.rs");
