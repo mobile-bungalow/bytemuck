@@ -53,6 +53,7 @@ jobs:
     steps:
     - uses: hecrj/setup-rust-action@v1
     - uses: actions/checkout@v2
+    - run: cp tests/trybuild_tests_src/nightly/* .
     - run: cargo install cross
     - run: cross test --verbose --target=${{ matrix.target }} --no-default-features
     - run: cross test --verbose --target=${{ matrix.target }} --all-features
