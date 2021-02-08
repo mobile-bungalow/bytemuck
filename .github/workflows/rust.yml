@@ -33,8 +33,9 @@ jobs:
       with:
         rust-version: ${{ matrix.rust }}
     - uses: actions/checkout@v2
-    - if: matrix.rust == 'nightly'
-    - run: cp tests/trybuild_tests_src/nightly/* .
+    - name: replace stderr output
+      if: matrix.rust == 'nightly'
+      run: cp tests/trybuild_tests_src/nightly/* .
     - run: cargo test --verbose
     - run: cargo test --verbose --no-default-features
     - run: cargo test --verbose --all-features
@@ -53,8 +54,6 @@ jobs:
     - uses: hecrj/setup-rust-action@v1
     - uses: actions/checkout@v2
     - run: cargo install cross
-    - run: cp tests/trybuild_tests_src/nightly/* .
-      if: matrix.rust == 'nightly'
     - run: cross test --verbose --target=${{ matrix.target }} --no-default-features
     - run: cross test --verbose --target=${{ matrix.target }} --all-features
     - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --all-features
@@ -71,7 +70,6 @@ jobs:
     # Note(Lokathor): We got some cached json errors, and so we cargo clean for this run.
     - run: rm -fr target
     - run: cp tests/trybuild_tests_src/nightly/* .
-      if: matrix.rust == 'nightly'
     - run: cargo miri test --verbose --no-default-features
     - run: cargo miri test --verbose --all-features
     - run: cd derive && rm -fr target && cargo miri test --verbose --all-features
@@ -89,8 +87,8 @@ jobs:
       with:
         rust-version: nightly
         components: rust-src
-    - run: cp tests/trybuild_tests_src/nightly/* .
-      if: matrix.rust == 'nightly'
+    - name: replace stderr output
+      run: cp tests/trybuild_tests_src/nightly/* .
     - name: Test with sanitizer
       env:
         RUSTFLAGS: -Zsanitizer=${{ matrix.sanitizer }}
