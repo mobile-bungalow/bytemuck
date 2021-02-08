@@ -1,9 +1,9 @@
-error[E0277]: the trait bound `&'static str: bytemuck::zeroable::Zeroable` is not satisfied
+error[E0277]: the trait bound `&'static str: Zeroable` is not satisfied
  --> $DIR/nonzeroable_fields.rs:5:39
   |
 3 | #[derive(Zeroable)]
-  |          -------- required by this bound in `_::{{closure}}#0::check::assert_impl`
+  |          -------- required by this bound in `assert_impl`
 4 | #[repr(transparent)]
-  | --------------------
+  | - required by a bound in this
 5 | struct NonZeroableField { _bad_field: &'static str }
-  |                                       ^^^^^^^^^^^^ the trait `bytemuck::zeroable::Zeroable` is not implemented for `&'static str`
+  |                                       ^^^^^^^^^^^^ the trait `Zeroable` is not implemented for `&'static str`

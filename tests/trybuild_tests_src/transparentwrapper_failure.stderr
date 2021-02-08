@@ -3,9 +3,13 @@ error: TransparentWrapper requires the struct to be #[repr(transparent)]
   |
 3 | #[derive(TransparentWrapper)]
   |          ^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: TransparentWrapper must have one field of the wrapped type
  --> $DIR/transparentwrapper_failure.rs:7:10
   |
 7 | #[derive(TransparentWrapper)]
   |          ^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
