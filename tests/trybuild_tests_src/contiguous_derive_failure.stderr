@@ -3,13 +3,9 @@ error: Only fieldless enums are supported
   |
 3 | #[derive(Contiguous, Copy, Clone)]
   |          ^^^^^^^^^^
-  |
-  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: Contiguous requires the enum discriminants to be contiguous
  --> $DIR/contiguous_derive_failure.rs:9:10
   |
 9 | #[derive(Contiguous, Copy, Clone)]
   |          ^^^^^^^^^^
-  |
-  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
