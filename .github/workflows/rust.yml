@@ -39,7 +39,7 @@ jobs:
       if: matrix.rust == 'stable'
     - run: cargo test --verbose --features="all_features_except_derive"
       if: matrix.rust != '1.34.0'
-    - run: cargo test --verbose --manifest-path=derive/Cargo.toml --features="all_features_except_derive"
+    - run: cargo test --verbose --manifest-path=derive/Cargo.toml --all-features
       if: matrix.rust != '1.34.0'
 
   cross-test:
