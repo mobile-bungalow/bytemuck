@@ -1,5 +1,6 @@
 
 #[test]
+#[cfg(feature = "derive")]
 fn derive_tests() {
     use std::{env, path::PathBuf, ffi::OsStr};
 
