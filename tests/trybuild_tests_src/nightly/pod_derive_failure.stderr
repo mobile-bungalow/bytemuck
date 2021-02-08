@@ -1,0 +1,53 @@
+error: Pod requires cannot be derived for structs containing generic parameters because the padding requirements can't be verified for generic structs
+ --> $DIR/pod_derive_failure.rs:4:10
+  |
+4 | #[derive(Pod)]
+  |          ^^^
+  |
+  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: Pod requires the struct to be #[repr(C)] or #[repr(transparent)]
+  --> $DIR/pod_derive_failure.rs:10:20
+   |
+10 | #[derive(Zeroable, Pod)]
+   |                    ^^^
+   |
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: cannot find derive macro `Zeroable` in this scope
+  --> $DIR/pod_derive_failure.rs:10:10
+   |
+10 | #[derive(Zeroable, Pod)]
+   |          ^^^^^^^^
+
+error: cannot find derive macro `Zeroable` in this scope
+  --> $DIR/pod_derive_failure.rs:14:10
+   |
+14 | #[derive(Zeroable, Pod)]
+   |          ^^^^^^^^
+
+error[E0277]: the trait bound `Padding: std::marker::Copy` is not satisfied
+  --> $DIR/pod_derive_failure.rs:14:20
+   |
+14 | #[derive(Zeroable, Pod)]
+   |                    ^^^ the trait `std::marker::Copy` is not implemented for `Padding`
+   |
+  ::: $WORKSPACE/src/pod.rs
+   |
+   | pub unsafe trait Pod: Zeroable + Copy + 'static {}
+   |                                  ---- required by this bound in `Pod`
+   |
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `Padding: Zeroable` is not satisfied
+  --> $DIR/pod_derive_failure.rs:14:20
+   |
+14 | #[derive(Zeroable, Pod)]
+   |                    ^^^ the trait `Zeroable` is not implemented for `Padding`
+   |
+  ::: $WORKSPACE/src/pod.rs
+   |
+   | pub unsafe trait Pod: Zeroable + Copy + 'static {}
+   |                       -------- required by this bound in `Pod`
+   |
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
