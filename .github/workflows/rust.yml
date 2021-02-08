@@ -70,8 +70,7 @@ jobs:
     - run: rm -fr target
     - run: cargo miri test --verbose --no-default-features
     - run: cargo miri test --verbose --features="all_features_except_derive"
-    - run: cd derive && rm -fr target && cargo miri test --verbose --features="all_features_except_derive"
-
+    - run: cd derive && rm -fr target && cargo miri test --verbose --all-features 
 
   sanitizer-test:
     name: Test with -Zsanitizer=${{ matrix.sanitizer }}
